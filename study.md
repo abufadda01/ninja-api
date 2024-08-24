@@ -1,3 +1,8 @@
+npm i -g @nestjs/cli@latest  --> to download nest js globally
+nest new project-name  --> to create new nestjs project
+
+
+
 MODULES
 app module act as the root of our application 
 its as the container of all other app modules as the starting point (dependency tree)

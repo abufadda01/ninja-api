@@ -1,5 +1,5 @@
 import { NinjasService } from './ninjas.service';
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post, Query } from '@nestjs/common';
 import { CreateNinjaDto } from './dto/create-ninja.dto';
 import { UpdateNinjaDto } from './dto/update-ninja.dto';
 
@@ -10,7 +10,7 @@ export class NinjasController {
     // const service = new NinjasService() 
     // define property in the constructor called ninjasService and its type : NinjasService
     // to not keep define new instances for each route method , we define only once in the constructor
-    // the shared thing between private , readonly that i can modify and update the value , but the difference is where i can access this value (private : only within the class) , (readonly : inside , outside the class)
+    // the shared thing between private , readonly that i can't modify and update the value , but the difference is where i can access this value (private : only within the class) , (readonly : inside , outside the class)
     constructor(private readonly ninjasService : NinjasService){}
     
 
@@ -23,7 +23,11 @@ export class NinjasController {
 
     @Get("/:id") // /ninjas/:id
     getOneNinja(@Param("id") id : number){
-        return this.ninjasService.getNinjaById(id)
+        try {
+            return this.ninjasService.getNinjaById(id)
+        } catch (error) {
+            throw new NotFoundException("ninja not found") // build in exception handler to handle cases where data been not found , what we send inside the ("error_message")
+        }
     }
 
 

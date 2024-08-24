@@ -28,3 +28,13 @@ to add the detailed logic , more complix operations , update the database maybe 
 and use this logic in any related fields such as controllers or other providers , controllers could inject many providers inside it
 
 providers are classes annotated with the @Injectable() decorator. A provider is any class that can be injected as a dependency, typically services that handle data access and business logic.
+
+
+
+
+PIPES
+Pipes are a powerful feature in Nest.js used for data transformation and data validation.
+
+Pipes have two typical use cases:
+transformation: transform input data to the desired form (e.g., from string to integer)
+validation: evaluate input data and if valid, simply pass it through unchanged; otherwise, throw an exception

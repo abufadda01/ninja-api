@@ -1,5 +1,5 @@
 import { NinjasService } from './ninjas.service';
-import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Patch, Post, Query, ValidationPipe } from '@nestjs/common';
 import { CreateNinjaDto } from './dto/create-ninja.dto';
 import { UpdateNinjaDto } from './dto/update-ninja.dto';
 
@@ -22,7 +22,7 @@ export class NinjasController {
 
 
     @Get("/:id") // /ninjas/:id
-    getOneNinja(@Param("id") id : number){
+    getOneNinja(@Param("id" , ParseIntPipe) id : number){ // we use ParseIntPipe build in pipe to convert the id param to int number value to ensure that i have integer number value
         try {
             return this.ninjasService.getNinjaById(id)
         } catch (error) {
@@ -33,7 +33,8 @@ export class NinjasController {
 
     @Post()
     // to make sure that we have some defined structure of our parsed req body data so the createNinjaDto that cames from the req body will and must be as the CreateNinjaDto class type (dto) , match its requirments
-    createNinja(@Body() createNinjaDto : CreateNinjaDto){ 
+    // when add new ValidationPipe() inside the @Body decorator now it goes to CreateNinjaDto dto class and check what validation decorators we have and compare them with what we receive from the req body to validate the incomming req body   
+    createNinja(@Body(new ValidationPipe()) createNinjaDto : CreateNinjaDto){
         return this.ninjasService.createNewNinja(createNinjaDto)
     }
 
@@ -59,7 +60,7 @@ export class NinjasController {
 // AND TO DEFINE THE ROUTE API TYPE WE ADD SPECIFIC DECORATER @Get , @Post , ... ABOVE OF THE FUNCTION THE USED TO HANDLE THIS ROUTE
 // AND WE CAN ADD EXTRA ROUTE PATH DEFINITION INSIDE THE API TYPE DECORATER IT SELF Get("/:id") TO BECOME /ninjas/:id
 // AND HOW WE CAN ACCESS THIS URL EXTRA PARAMS IN THE FUNCTION THAT HANDLE THIS ROUTE BY USING THE @Param decorater in the function definition (to parse and access the param outside from our url)
-// @Param("param_name_from_url") param_name : its_type , then we can use it , access any place in our function that handle this req
+// @Param("param_name_from_url") param_name(will be the extracted param form the url) : its_type , then we can use it , access any place in our function that handle this req
 // ALSO WE CAN DO SAME THING FOR QUERIES AND ACCESS THEM BY @Query("query_name_from_url") query_name : its_type
 // ALSO WE CAN ACCESS THE REQ BODY USING @Body decorater , @Body object_that_came_from_req object_dto/expected_type
 // GET /ninjas --> []

@@ -28,7 +28,7 @@ export class NinjasController {
 
 
     @Post()
-    // to make sure that we have some defined structure of our parsed req body data so the createNinjaDto that cames from the req body will and must be as the CreateNinjaDto class type (dto)
+    // to make sure that we have some defined structure of our parsed req body data so the createNinjaDto that cames from the req body will and must be as the CreateNinjaDto class type (dto) , match its requirments
     createNinja(@Body() createNinjaDto : CreateNinjaDto){ 
         return this.ninjasService.createNewNinja(createNinjaDto)
     }

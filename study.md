@@ -4,7 +4,7 @@ its as the container of all other app modules as the starting point (dependency 
 we can create new modules by write (nest g module module_name) command in the terminal / g : generate
 and the new module must be added to imports array in the app.module.ts file
 each module has its own controllers , providers
-we can add contoller , provider (service) to each module by (nest g controller controller_name)  (nest g service service_name)
+we can add contoller , provider (service) to each module by (nest g controller module_name)  (nest g service module_name)
 or we can generate all module and its own resources with one command (nest g resource module_name)
 
 

@@ -7,6 +7,7 @@ import { Injectable } from '@nestjs/common';
 @Injectable() 
 export class NinjasService {
 
+    
     private ninjas = [
         {id : 0 , name : "ninjaA" , wepon : "stars"},
         {id : 1 , name : "ninjaB" , wepon : "nunchucks"},
